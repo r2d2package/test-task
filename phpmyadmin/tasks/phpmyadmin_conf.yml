@@ -1,0 +1,34 @@
+- name: add_config
+  copy:
+    src:  ./phpmyadmin/files/config.inc.php
+    dest: /usr/share/phpmyadmin/config.inc.php
+    owner: root
+    group: root
+    mode: 0755
+
+- name: add_grant_script
+  copy:
+    src:  ./phpmyadmin/files/grantpma.sql
+    dest: /usr/share/phpmyadmin/sql/
+    owner: root
+    group: root
+    mode: 0750
+
+- name: create mycnf
+  shell: "echo [client] >/root/.my.cnf && echo password ={{ mysql_password }} >> /root/.my.cnf"
+  become: yes
+
+
+- name: create_tables_scripts
+  shell: "mysql < /usr/share/phpmyadmin/sql/create_tables.sql"
+  become: yes
+- name: create pma_user
+  shell:
+    cmd: 'mysql < /usr/share/phpmyadmin/sql/grantpma.sql'
+  become: yes
+
+
+- name: remove mycnf
+  file:
+    path: /root/.my.cnf
+    state: absent

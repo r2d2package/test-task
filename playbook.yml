@@ -1,0 +1,7 @@
+- name: install LEMP server.
+  hosts: all
+  become: yes
+  roles:
+    - LEMP
+    - phpmyadmin
+    - FTP

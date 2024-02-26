@@ -1,0 +1,5 @@
+---
+# vars file for ftp
+install_path: "/var/www/site-2.ru"
+site_folder: "/var/www/site-2.ru"
+site_user: "site-2.ru"

@@ -1,0 +1,99 @@
+---
+- name: add group
+  group:
+    name: "{{ item.name }}"
+    state: present
+    gid: "{{ item.gid }}"
+  with_items:
+    - { name: '{{DOMAIN_NAME[0]}}', gid: '{{GROUP_GID[0]}}' }
+    - { name: '{{DOMAIN_NAME[1]}}', gid: '{{GROUP_GID[1]}}' }
+
+- name: add user
+  user:
+    name: "{{ item.dname }}"
+    uid: "{{ item.user_uid }}"
+    group: "{{ item.dname }}"
+    state: present
+  with_items:
+    - { dname: '{{DOMAIN_NAME[0]}}', user_uid: '{{GROUP_GID[0]}}' }
+    - { dname: '{{DOMAIN_NAME[1]}}', user_uid: '{{GROUP_GID[1]}}' }
+
+- name: create home directory
+  file:
+    path: "/var/www/{{ item }}"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0751
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+
+- name: create data directory
+  file:
+    path: "/var/www/{{ item }}/doc_root"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+
+- name: create logs directory
+  file:
+    path: "/var/www/{{ item }}/logs"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+
+- name: create sessions directory
+  file:
+    path: "/var/www/{{ item }}/sessions"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+
+- name: create tmp directory
+  file:
+    path: "/var/www/{{ item }}/tmp"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+
+- name: create upload directory
+  file:
+    path: "/var/www/{{ item }}/tmp"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+
+- name: create logs/apache2 directory
+  file:
+    path: "/var/www/{{ item }}/logs/apache2"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+
+- name: create logs/nginx directory
+  file:
+    path: "/var/www/{{ item }}/logs/nginx"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ DOMAIN_NAME }}"

@@ -1,0 +1,12 @@
+- name: Install apache2
+  apt:
+    name: apache2
+    state: latest
+- name: libapache2-mpm-itk
+  apt:
+    name: libapache2-mpm-itk
+    state: latest
+- name: libapache2-mod-php8.1
+  apt:
+    name: libapache2-mod-php8.1
+    state: latest

@@ -1,0 +1,21 @@
+---
+# vars file for LEMP
+DOMAIN_NAME:
+  - site.ru
+  - site-2.ru
+USER_UID:
+  - 10005
+  - 10006
+GROUP_GID:
+  - 10005
+  - 10006
+locale1: ru_RU.UTF-8
+locale2: en_US.UTF-8
+time_zone: Europe/Moscow
+##php an php moduls version
+php_mod_version: 8.1
+mysql_root_password: PLjXe3Lkmx8j
+##for bitrix site.ru
+name_db: site_db
+user_db: site_usr
+password_user_db: m3VaYnX7sFQ2

@@ -1,0 +1,25 @@
+- copy:
+    src:  ./LEMP/files/php/php-fpm/pool.d/{{item}}
+    dest: /etc/php/7.3/fpm/pool.d/{{item}}
+  with_items:
+    - 73_site-2.ru.conf
+  ignore_errors: true
+  notify:
+    - rest_php7.3-fpm
+- copy:
+    src: ./LEMP/files/php/php-fpm/pool.d/{{item}}
+    dest: /etc/php/7.4/fpm/pool.d/{{item}}
+  with_items:
+    - 74_site-2.ru.conf
+  ignore_errors: true
+  notify:
+    - rest_php7.4-fpm
+
+- copy:
+    src: ./LEMP/files/php/php-fpm/pool.d/{{item}}
+    dest: /etc/php/8.1/fpm/pool.d/{{item}}
+  ignore_errors: true
+  with_items:
+    - 81_site-2.ru.conf
+  notify:
+    - rest_php8.1-fpm

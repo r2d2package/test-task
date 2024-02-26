@@ -1,0 +1,18 @@
+[mysqld]
+character-set-server = utf8
+collation-server = utf8_unicode_ci
+
+innodb_file_per_table	= 1
+innodb_buffer_pool_size = 2GB
+
+max_allowed_packet	= 32M
+thread_stack		= 512K
+open_files_limit	= 8192
+max_connections		= 100
+
+#query_cache_limit	= 4M
+#query_cache_size	= 32M The query cache is deprecated as of MySQL 5.7.20, and is removed in MySQL 8.0.
+
+tmp_table_size		= 50M
+max_heap_table_size	= 50M
+thread_cache_size	= 64

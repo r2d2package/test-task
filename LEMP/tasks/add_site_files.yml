@@ -1,0 +1,14 @@
+- name: site.ru_bitrix
+  uri:
+    url: https://www.1c-bitrix.ru/download/scripts/bitrixsetup.php
+    dest: /var/www/site.ru/doc_root/
+    owner: site.ru
+    group: site.ru
+    mode: 0750
+- name: site_ru_info.php
+  copy:
+    src: /var/ansible/LEMP/files/content/index.php
+    dest: /var/www/site-2.ru/doc_root/
+    owner: site-2.ru
+    group: site-2.ru
+    mode: 0750

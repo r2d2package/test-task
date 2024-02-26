@@ -1,0 +1,13 @@
+---
+- name: update repo.
+  shell: apt update
+- name: install default app.
+  shell:
+    cmd: "apt-get install -y dirmngr mc iotop htop telnet tcpdump nmap curl hexedit sudo zip unzip patch pwgen vim less parted subversion ntp bzip2 lsof strace mutt s-nail ncdu smartmontools tree dnsutils logrotate rsyslog acl"
+- name: time
+  shell:
+    cmd: "timedatectl set-timezone {{time_zone}}"
+
+- name: locale settings
+  shell:
+    cmd: 'locale-gen {{locale1}} && update-locale LANG={{locale2}} LC_TIME="{{locale1}}"'

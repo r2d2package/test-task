@@ -1,0 +1,29 @@
+- name: add PHP repo
+  apt_repository:
+    repo: ppa:ondrej/php
+
+
+- name: install php
+  vars:
+    php_mod_version: 8.1
+
+  apt: name={{ item }} update_cache=yes state=latest
+  loop:
+  - git
+  - php{{php_mod_version}}
+  - php{{php_mod_version}}-fpm
+  - php{{php_mod_version}}-common
+  - php{{php_mod_version}}-curl
+  - php{{php_mod_version}}-gd
+  - php{{php_mod_version}}-imagick
+  - php{{php_mod_version}}-imap
+  - php{{php_mod_version}}-mbstring
+  - php{{php_mod_version}}-xml
+  - php{{php_mod_version}}-xmlrpc
+  - php{{php_mod_version}}-soap
+  - php{{php_mod_version}}-intl
+  - php{{php_mod_version}}-zip
+  - php{{php_mod_version}}-apcu
+  - php{{php_mod_version}}-mysql
+  - php{{php_mod_version}}-mcrypt
+  ignore_errors: True

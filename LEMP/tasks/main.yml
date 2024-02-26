@@ -1,0 +1,19 @@
+---
+# tasks file for LEMP
+ - include_tasks: def.yml
+#####users,groups and structures
+ - include_tasks: create_users_and_site_structures.yml
+ - include_tasks: add_site_files.yml
+#####install and conf mysql
+ - include_tasks: mysql_install.yml
+ - include_tasks: mysql_conf.yml
+#####instal php and php-fpm
+ - include_tasks: php_install.yml
+ - include_tasks: php-fpm_conf.yml
+#####install apache2
+ - include_tasks: apache2_install.yml
+ - include_tasks: apache2_conf.yml
+#####install nginx and config
+ - include_tasks: nginx_install.yml
+####config nginx
+ - include_tasks: nginx_conf.yml

@@ -1,0 +1,23 @@
+---
+- name: Copy config.
+  copy:
+    src: ./LEMP/files/nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf
+
+- name: Copy domain__name config
+  copy:
+    src: ./LEMP/files/nginx/sites-available/{{item}}
+    dest: /etc/nginx/sites-available/{{item}}
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+- name: enable site domain_name
+  file:
+    src: /etc/nginx/sites-available/{{item}}
+    dest: /etc/nginx/sites-enabled/{{item}}
+    state: link
+  with_items:
+    - "{{ DOMAIN_NAME }}"
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

@@ -1,0 +1,33 @@
+- name: create phpmyadmin directory
+  file:
+    path: /usr/share/phpmyadmin
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: download phpmyadmin
+  uri:
+    url: https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+    dest: /usr/share/phpmyadmin.tar.gz
+    owner: root
+    group: root
+    mode: 0755
+- name: unzip phpmyadmin
+  unarchive:
+    src: /usr/share/phpmyadmin.tar.gz
+    dest: /usr/share/phpmyadmin/
+    remote_src: yes
+    extra_opts: ['--strip-components=1']
+    mode: 0755
+
+- name: create tmp directory
+  file:
+    path: /usr/share/phpmyadmin/tmp
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+
+- name: ACL permission
+  shell: "setfacl -R -d -m u::rwx,g::rwx,o::rx,u:site-2.ru:rwx,g:site-2.ru:rwx,u:site.ru:rwx,g:site.ru:rwx /usr/share/phpmyadmin/tmp/"

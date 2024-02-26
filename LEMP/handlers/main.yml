@@ -1,0 +1,21 @@
+---
+# handlers file for LEMP
+- name: reload nginx
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
+
+- name: rest_php7.3-fpm
+  ansible.builtin.service:
+    name: php7.3-fpm
+    state: restarted
+
+- name: rest_php7.4-fpm
+  ansible.builtin.service:
+    name: php7.4-fpm
+    state: restarted
+
+- name: rest_php8.1-fpm
+  ansible.builtin.service:
+    name: php8.1-fpm
+    state: restarted

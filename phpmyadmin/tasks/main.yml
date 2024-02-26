@@ -1,0 +1,4 @@
+---
+# tasks file for phpmyadmin
+- include_tasks: phpmyadmin_install.yml
+- include_tasks: phpmyadmin_conf.yml

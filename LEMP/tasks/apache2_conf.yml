@@ -1,0 +1,55 @@
+- name: Copy main apaches config
+  copy:
+    src: ./LEMP/files/php/apache2/php.ini_without_coments
+    dest: /etc/php/8.1/apache2/php.ini
+
+- name: change apache version for bitrix
+  shell: "a2dismod {{item}}; a2enmod php8.1"
+  with_items:
+   - php7.1
+   - php7.2
+   - php7.3
+   - php7.4
+
+- name: Copy main apaches config
+  copy:
+    src: ./LEMP/files/apache/{{item}}
+    dest: /etc/apache2/{{item}}
+  with_items:
+    - ports.conf
+    - apache2.conf
+
+- name: mods-available config
+  copy:
+    src: ./LEMP/files/apache/mods-available//{{item}}
+    dest: /etc/apache2/mods-available/{{item}}
+  with_items:
+    - mpm_prefork.conf
+
+- name: security config
+  copy:
+    src: ./LEMP/files/apache/conf-available//{{item}}
+    dest: /etc/apache2/conf-available/{{item}}
+  with_items:
+    - security.conf
+
+- name: Copy domain_name config
+  copy:
+    src: ./LEMP/files/apache/sites-available/{{item}}
+    dest: /etc/apache2/sites-available/{{item}}
+  with_items:
+    - site.ru.conf
+
+- name: enable site domain_name
+  file:
+    src: /etc/apache2/sites-available/{{item}}
+    dest: /etc/apache2/sites-enabled/{{item}}
+    state: link
+  with_items:
+    - site.ru.conf
+
+
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted

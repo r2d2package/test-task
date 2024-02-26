@@ -1,0 +1,27 @@
+- name: Create a new database with name domen_name_db
+  mysql_db:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: "{{name_db}}"
+    state: present
+
+- name: add user domain_name_usr
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    host: localhost
+    column_case_sensitive: false
+    name: "{{user_db}}"
+    password: "{{password_user_db}}"
+    priv: '{{name_db}}.*:ALL,GRANT'
+    state: present
+
+- name: Copy config
+  copy:
+    src: ./LEMP/files/mysql/mysql.cnf
+    dest: /etc/mysql/mysql.conf.d/mysql.cnf
+
+- name: restart mysql
+  service:
+    name: mysql
+    state: restarted

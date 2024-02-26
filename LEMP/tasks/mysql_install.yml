@@ -1,0 +1,26 @@
+- name: key and repo
+  block:
+    - name: add
+      get_url:
+          url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+          dest: /etc/apt/keyrings/mysql.asc
+
+    - name: add repo
+      apt_repository:
+          repo: "deb [signed-by=/etc/apt/keyrings/mysql.asc] http://repo.mysql.com/apt/ubuntu/ jammy mysql-8.0"
+          state: present
+#- name: add repo
+#  shell: echo \"deb http://repo.mysql.com/apt/ubuntu/ (lsb_release -sc) mysql-8.0 | tee /etc/apt/sources.list.d/mysql.list"
+
+
+- name: install mysql8.0
+  apt:
+    name: mysql-server=8.0.36-1ubuntu22.04
+    state: present
+    update_cache: yes
+
+- name: install python-mysqldb
+  apt:
+    name: python3-mysqldb
+    state: present
+    update_cache: yes

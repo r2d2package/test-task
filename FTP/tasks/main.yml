@@ -1,0 +1,4 @@
+---
+# tasks file for ftp
+# just only for php-fpm sites
+- include_tasks: filegator_install.yml

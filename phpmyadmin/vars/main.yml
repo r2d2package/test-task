@@ -1,0 +1,6 @@
+---
+# phpmyadmin oficial site link
+download_link: "https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz"
+# this variables will be used for creating pma_user and pma_database 
+mysql_user: "root"
+mysql_password: "PLjXe3Lkmx8j"

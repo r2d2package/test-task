@@ -1,0 +1,26 @@
+- name: download filegator
+  uri:
+    url: https://github.com/filegator/static/raw/master/builds/filegator_latest.zip
+    dest: "{{site_folder}}/filegator.zip"
+    owner: "{{site_user}}"
+    group: "{{site_user}}"
+    mode: 0755
+
+- name: unzip filegator
+  unarchive:
+    src: "{{site_folder}}/filegator.zip"
+    dest: "{{site_folder}}"
+    owner: "{{site_user}}"
+    group: "{{site_user}}"
+    remote_src: yes
+    mode: 0755
+
+- name: change config
+  replace:
+    path: /var/www/site-2.ru/filegator/configuration.php
+    regexp:  "__DIR__.'/repository'"
+    replace: "'{{site_folder}}/doc_root/'"
+
+- name: ACL permission
+  shell: "setfacl -R -d -m u::rwx,g::rx,o::rx,u:site-2.ru:rwx,g:site-2.ru:rwx,u:www-data:rwx,g:www-data:rwx {{site_folder}}/doc_root/"
+  become: yes

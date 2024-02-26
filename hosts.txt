@@ -1,0 +1,2 @@
+[test]
+u22slave2 ansible_host=192.168.0.11 ansible_port=22 ansible_user=alexey ansible_ssh_private_key_file=/home/alexey/.ssh/id_rsa
