@@ -44,16 +44,16 @@ try_files $uri /index.php;
 
 
 location /phpmyadmin {
-  root /usr/share/;
-  index index.php;
-
-   location ~ ^/(doc|sql|setup)/ {
-    deny all;
-  }
-
- 
-  location ~ ^.+\.php$ {
-		 proxy_pass      http://127.0.0.1:81; # apache
+	alias /usr/share/phpmyadmin;
+	index index.php;
+	location ~ /(doc|sql|setup)/ {
+    		deny all;
+  		}
+	location ~ \.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt)$ {
+		access_log /var/www/site.ru/logs/nginx/img.log;
+	  }
+ 	location ~ \.php$ {
+		proxy_pass      http://127.0.0.1:81; # apache
                 proxy_redirect  off;
 
                 proxy_set_header   Host                 $host;
@@ -72,18 +72,7 @@ location /phpmyadmin {
                 proxy_buffers           4 32k;
                 proxy_busy_buffers_size 64k;
                 proxy_temp_file_write_size 64k;
-
-  }
-
-  # Load media from correct root
-  location ~  ^.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt)$ {
-	  root /usr/share/;
+		}
 	}
-
-}
-
-
-
-
 
 }
