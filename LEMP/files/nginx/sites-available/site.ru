@@ -45,7 +45,6 @@ try_files $uri /index.php;
 
 location /phpmyadmin {
 	alias /usr/share/phpmyadmin;
-	index index.php;
 	location ~ /(doc|sql|setup)/ {
     		deny all;
   		}
